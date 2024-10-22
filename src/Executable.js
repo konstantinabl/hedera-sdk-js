@@ -556,13 +556,22 @@ export default class Executable {
 
         // Save the start time to be used later with request timeout
         const startTime = Date.now();
-
+        if (this._logger) {
+            this._logger.debug(
+                `Start time of request: ${startTime.toString()}`,
+            );
+        }
         // Saves each error we get so when we err due to max attempts exceeded we'll have
         // the last error that was returned by the consensus node
         let persistentError = null;
 
         // The retry loop
         for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+            if (this._logger) {
+                this._logger.debug(
+                    `We are at attempt ${attempt}`,
+                );
+            }
             // Determine if we've exceeded request timeout
             if (
                 this._requestTimeout != null &&
