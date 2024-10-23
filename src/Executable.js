@@ -568,9 +568,7 @@ export default class Executable {
         // The retry loop
         for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
             if (this._logger) {
-                this._logger.debug(
-                    `We are at attempt ${attempt}`,
-                );
+                this._logger.debug(`We are at attempt ${attempt}`);
             }
             // Determine if we've exceeded request timeout
             if (
